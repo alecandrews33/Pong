@@ -2,8 +2,6 @@
 # pip install PyQt5
 from traits.api import HasTraits, Float
 
-from traitsui.api import View
-
 
 class vector(HasTraits):
 
@@ -12,4 +10,4 @@ class vector(HasTraits):
 
 
 if __name__ == '__main__':
-    vector(3,4).configure_traits()
+    vector().configure_traits()
