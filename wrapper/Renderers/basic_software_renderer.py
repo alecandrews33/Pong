@@ -2,6 +2,7 @@ import sys
 import sdl2
 import sdl2.ext
 
+BLACK = sdl2.ext.Color(0, 0, 0)
 
 class SoftwareRenderSystem(sdl2.ext.SoftwareSpriteRenderSystem):
     def __init__(self, window):

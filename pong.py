@@ -3,19 +3,15 @@ import sys
 import sdl2
 import sdl2.ext
 
-import traitsui.api
+from traits.api import Enum, HasTraits
 
-from .wrapper.MovementSystems.basic_movement_system import MovementSystem
-from .wrapper.CollisionSystems.basic_collision_system import CollisionSystem
-from .wrapper.Renderers.basic_software_renderer import SoftwareRenderSystem
-from .wrapper.CPUplayers.basicAI import TrackingAIController
-
-
-
+from wrapper.MovementSystems.basic_movement_system import *
+from wrapper.CollisionSystems.basic_collision_system import *
+from wrapper.Renderers.basic_software_renderer import *
+from wrapper.CPUplayers.basicAI import *
 
 BLACK = sdl2.ext.Color(0, 0, 0)
 WHITE = sdl2.ext.Color(255, 255, 255)
-PADDLE_SPEED = 3
 BALL_SPEED = 3
 
 
@@ -25,19 +21,29 @@ class GameInfo(HasTraits):
 
 
 
+class Player(sdl2.ext.Entity):
+    def __init__(self, world, sprite, posx=0, posy=0, ai=False):
+        self.sprite = sprite
+        self.sprite.position = posx, posy
+        self.velocity = Velocity()
+        self.playerdata = PlayerData()
+        self.playerdata.ai = ai
+
+
+class Ball(sdl2.ext.Entity):
+    def __init__(self, world, sprite, posx=0, posy=0):
+        self.sprite = sprite
+        self.sprite.position = posx, posy
+        self.velocity = Velocity()
+
 
 def run(game_info):
     sdl2.ext.init()
     window = sdl2.ext.Window("The Pong Game", size=(800, 600))
     window.show()
 
-    if "-hardware" in sys.argv:
-        print("Using hardware acceleration")
-        renderer = sdl2.ext.Renderer(window)
-        factory = sdl2.ext.SpriteFactory(sdl2.ext.TEXTURE, renderer=renderer)
-    else:
-        print("Using software rendering")
-        factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
+
+    factory = sdl2.ext.SpriteFactory(sdl2.ext.SOFTWARE)
 
     # Create the paddles - we want white ones. To keep it easy enough for us,
     # we create a set of surfaces that can be used for Texture- and
@@ -51,10 +57,10 @@ def run(game_info):
     movement = MovementSystem(0, 0, 800, 600)
     collision = CollisionSystem(0, 0, 800, 600)
     aicontroller = TrackingAIController(0, 600)
-    if factory.sprite_type == sdl2.ext.SOFTWARE:
-        spriterenderer = SoftwareRenderSystem(window)
-    else:
-        spriterenderer = TextureRenderSystem(renderer)
+
+
+    spriterenderer = SoftwareRenderSystem(window)
+
 
     world.add_system(aicontroller)
     world.add_system(movement)
@@ -98,13 +104,20 @@ def run(game_info):
                     running = False
                     break
                 if event.type == sdl2.SDL_KEYDOWN:
-                    if event.key.keysym.sym == sdl2.SDLK_UP:
+                    if event.key.keysym.sym == sdl2.SDLK_w:
                         player1.velocity.vy = -PADDLE_SPEED
-                    elif event.key.keysym.sym == sdl2.SDLK_DOWN:
+                    elif event.key.keysym.sym == sdl2.SDLK_s:
                         player1.velocity.vy = PADDLE_SPEED
+
+                    if event.key.keysym.sym == sdl2.SDLK_UP:
+                        player2.velocity.vy = -PADDLE_SPEED
+                    elif event.key.keysym.sym == sdl2.SDLK_DOWN:
+                        player2.velocity.vy = PADDLE_SPEED
                 elif event.type == sdl2.SDL_KEYUP:
-                    if event.key.keysym.sym in (sdl2.SDLK_UP, sdl2.SDLK_DOWN):
+                    if event.key.keysym.sym in (sdl2.SDLK_w, sdl2.SDLK_s):
                         player1.velocity.vy = 0
+                    if event.key.keysym.sym in (sdl2.SDLK_UP, sdl2.SDLK_DOWN):
+                        player2.velocity.vy = 0
             sdl2.SDL_Delay(10)
             world.process()
 

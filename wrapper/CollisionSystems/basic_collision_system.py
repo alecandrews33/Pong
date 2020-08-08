@@ -3,7 +3,7 @@ import sdl2
 import sdl2.ext
 
 
-from .wrapper.MovementSystems.basic_movement_system import Velocity
+from wrapper.MovementSystems.basic_movement_system import Velocity
 
 class CollisionSystem(sdl2.ext.Applicator):
     def __init__(self, minx, miny, maxx, maxy):

@@ -2,6 +2,11 @@ import sys
 import sdl2
 import sdl2.ext
 
+from wrapper.MovementSystems.basic_movement_system import Velocity
+
+PADDLE_SPEED = 3
+
+
 class PlayerData(object):
     def __init__(self):
         super(PlayerData, self).__init__()
