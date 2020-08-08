@@ -2,10 +2,8 @@ import sys
 import sdl2
 import sdl2.ext
 
-BLACK = sdl2.ext.Color(0, 0, 0)
-WHITE = sdl2.ext.Color(255, 255, 255)
-PADDLE_SPEED = 3
-BALL_SPEED = 3
+
+from .wrapper.MovementSystems.basic_movement_system import MovementSystem
 
 class CollisionSystem(sdl2.ext.Applicator):
     def __init__(self, minx, miny, maxx, maxy):
