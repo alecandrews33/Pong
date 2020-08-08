@@ -140,13 +140,6 @@ class TextureRenderSystem(sdl2.ext.TextureSpriteRenderSystem):
         super(TextureRenderSystem, self).render(components)
 
 
-class Velocity(object):
-    def __init__(self):
-        super(Velocity, self).__init__()
-        self.vx = 0
-        self.vy = 0
-
-
 class PlayerData(object):
     def __init__(self):
         super(PlayerData, self).__init__()
