@@ -7,7 +7,8 @@ import traitsui.api
 
 from .wrapper.MovementSystems.basic_movement_system import MovementSystem
 from .wrapper.CollisionSystems.basic_collision_system import CollisionSystem
-from .wrapper.Renderers import
+from .wrapper.Renderers.basic_software_renderer import SoftwareRenderSystem
+from .wrapper.CPUplayers.basicAI import TrackingAIController
 
 
 
