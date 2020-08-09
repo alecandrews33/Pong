@@ -22,6 +22,12 @@ class GameInfo(HasTraits):
                 )
 
 
+# basically now in order to add a new game all we need to do is make a class
+# for that game and make it have a run method that accepts game info. Actually
+# the requirement is probably looser than that, it just needs to be importable 
+# and runable from inside this script
+
+
 if __name__ == "__main__":
     game_info = GameInfo()
     game_info.configure_traits()
