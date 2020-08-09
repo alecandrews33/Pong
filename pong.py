@@ -4,6 +4,7 @@ import sdl2
 import sdl2.ext
 
 from traits.api import Enum, HasTraits
+from traitsui.api import Item, View
 
 from wrapper.MovementSystems.basic_movement_system import *
 from wrapper.CollisionSystems.basic_collision_system import *
@@ -18,6 +19,11 @@ BALL_SPEED = 3
 class GameInfo(HasTraits):
     num_players = Enum(1, 2)
     difficulty = Enum('Easy', 'Medium', 'Pong Master')
+
+    view = View(Item(name='num_players'),
+                Item(name='difficulty',
+                     enabled_when='num_players == 1'),
+                )
 
 
 
@@ -56,23 +62,35 @@ def run(game_info):
 
     movement = MovementSystem(0, 0, 800, 600)
     collision = CollisionSystem(0, 0, 800, 600)
-    aicontroller = TrackingAIController(0, 600)
-
-
     spriterenderer = SoftwareRenderSystem(window)
 
 
-    world.add_system(aicontroller)
     world.add_system(movement)
     world.add_system(collision)
     world.add_system(spriterenderer)
 
-    ball = Ball(world, sp_ball, 390, 290)
-    ball.velocity.vx = -BALL_SPEED
-    collision.ball = ball
-    aicontroller.ball = ball
 
     if game_info.num_players == 1:
+        if game_info.difficulty == 'Easy':
+            PADDLE_SPEED_AI = 3
+            BALL_SPEED = 3
+        elif game_info.difficulty == 'Medium':
+            PADDLE_SPEED_AI = 5
+            BALL_SPEED = 4
+        # Eventually this else will handle a much better AI
+        else:
+            PADDLE_SPEED_AI = 3
+            BALL_SPEED = 3
+
+        aicontroller = TrackingAIController(0, 600, PADDLE_SPEED_AI)
+        world.add_system(aicontroller)
+
+        ball = Ball(world, sp_ball, 390, 290)
+        ball.velocity.vx = -BALL_SPEED
+        collision.ball = ball
+        aicontroller.ball = ball
+
+
         player1 = Player(world, sp_paddle1, 0, 250)
         player2 = Player(world, sp_paddle2, 780, 250, True)
 
@@ -94,6 +112,10 @@ def run(game_info):
             world.process()
 
     else:
+        ball = Ball(world, sp_ball, 390, 290)
+        ball.velocity.vx = -BALL_SPEED
+        collision.ball = ball
+
         player1 = Player(world, sp_paddle1, 0, 250)
         player2 = Player(world, sp_paddle2, 780, 250)
 
