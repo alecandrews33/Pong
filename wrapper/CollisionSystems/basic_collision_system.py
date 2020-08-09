@@ -2,6 +2,7 @@ import sys
 import sdl2
 import sdl2.ext
 
+import random
 
 from wrapper.MovementSystems.basic_movement_system import Velocity
 
@@ -52,4 +53,6 @@ class CollisionSystem(sdl2.ext.Applicator):
 
         if (self.ball.sprite.x <= self.minx or
             self.ball.sprite.x + self.ball.sprite.size[0] >= self.maxx):
-            self.ball.velocity.vx = -self.ball.velocity.vx
+            self.ball.sprite.position = 390, 290
+            self.ball.velocity.vx = random.choice([-7,-5,-3,3,5,7])
+            self.ball.velocity.vy = random.choice([-2,-1,1,2])
