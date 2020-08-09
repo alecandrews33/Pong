@@ -42,7 +42,11 @@ thinking a faster ball might make it harder, but then I added the ball reset
 with a random velocity stuff after a score so now that change seems kind of 
 pointless.  Should the initial ball speed be random too?
 
-6)
+6) (Aaron can do later today) right now everything is in the pong file related 
+to running the game.  We should pull out the game menu where games are selected
+and run, and just like import the needed run functions (for now while eerything
+is in python at least, eventually wont just be a run function, will be way to
+run game in whatever form)
 
 
 
