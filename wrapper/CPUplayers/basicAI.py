@@ -3,15 +3,8 @@ import sdl2
 import sdl2.ext
 
 from wrapper.MovementSystems.basic_movement_system import Velocity
+from wrapper.GeneralGameClasses.player_data import PlayerData
 
-#PADDLE_SPEED = 3
-
-
-class PlayerData(object):
-    def __init__(self):
-        super(PlayerData, self).__init__()
-        self.ai = False
-        self.points = 0
 
 class TrackingAIController(sdl2.ext.Applicator):
     def __init__(self, miny, maxy, PADDLE_SPEED):

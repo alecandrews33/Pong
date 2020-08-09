@@ -63,12 +63,10 @@ def run(game_info):
     world = sdl2.ext.World()
 
     movement = MovementSystem(0, 0, 800, 600)
-    collision = CollisionSystem(0, 0, 800, 600)
     spriterenderer = SoftwareRenderSystem(window)
 
 
     world.add_system(movement)
-    world.add_system(collision)
     world.add_system(spriterenderer)
 
 
@@ -89,12 +87,15 @@ def run(game_info):
 
         ball = Ball(world, sp_ball, 390, 290)
         ball.velocity.vx = -BALL_SPEED
-        collision.ball = ball
         aicontroller.ball = ball
 
 
         player1 = Player(world, sp_paddle1, 0, 250)
         player2 = Player(world, sp_paddle2, 780, 250, True)
+
+        collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
+        world.add_system(collision)
+        collision.ball = ball
 
         running = True
         while running:
@@ -116,10 +117,13 @@ def run(game_info):
     else:
         ball = Ball(world, sp_ball, 390, 290)
         ball.velocity.vx = -BALL_SPEED
-        collision.ball = ball
 
         player1 = Player(world, sp_paddle1, 0, 250)
         player2 = Player(world, sp_paddle2, 780, 250)
+
+        ollision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
+        world.add_system(collision)
+        collision.ball = ball
 
         running = True
         while running:

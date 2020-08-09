@@ -5,9 +5,10 @@ import sdl2.ext
 import random
 
 from wrapper.MovementSystems.basic_movement_system import Velocity
+from wrapper.GeneralGameClasses.player_data import PlayerData
 
 class CollisionSystem(sdl2.ext.Applicator):
-    def __init__(self, minx, miny, maxx, maxy):
+    def __init__(self, minx, miny, maxx, maxy, p1data, p2data):
         super(CollisionSystem, self).__init__()
         self.componenttypes = Velocity, sdl2.ext.Sprite
         self.ball = None
@@ -15,6 +16,8 @@ class CollisionSystem(sdl2.ext.Applicator):
         self.miny = miny
         self.maxx = maxx
         self.maxy = maxy
+        self.p1data = p1data
+        self.p2data = p2data
 
     def _overlap(self, item):
         sprite = item[1]
@@ -51,8 +54,16 @@ class CollisionSystem(sdl2.ext.Applicator):
             self.ball.sprite.y + self.ball.sprite.size[1] >= self.maxy):
             self.ball.velocity.vy = -self.ball.velocity.vy
 
-        if (self.ball.sprite.x <= self.minx or
-            self.ball.sprite.x + self.ball.sprite.size[0] >= self.maxx):
+
+        if self.ball.sprite.x <= self.minx:
+            self.p2data.points = self.p2data.points + 1
+            print("Player 1: {0}, Player 2: {1}".format(self.p1data.points, self.p2data.points))
+            self.ball.sprite.position = 390, 290
+            self.ball.velocity.vx = random.choice([-7,-5,-3,3,5,7])
+            self.ball.velocity.vy = random.choice([-2,-1,1,2])
+        elif self.ball.sprite.x + self.ball.sprite.size[0] >= self.maxx:
+            self.p1data.points = self.p1data.points + 1
+            print("Player 1: {0}, Player 2: {1}".format(self.p1data.points, self.p2data.points))
             self.ball.sprite.position = 390, 290
             self.ball.velocity.vx = random.choice([-7,-5,-3,3,5,7])
             self.ball.velocity.vy = random.choice([-2,-1,1,2])
