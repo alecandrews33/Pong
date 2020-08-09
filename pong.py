@@ -20,10 +20,12 @@ PADDLE_SPEED = 3
 class GameInfo(HasTraits):
     num_players = Enum(1, 2)
     difficulty = Enum('Easy', 'Medium', 'Pong Master')
+    game_mode = Enum('Classic Pong')
 
     view = View(Item(name='num_players'),
                 Item(name='difficulty',
                      enabled_when='num_players == 1'),
+                Item(name='game_mode'),
                 buttons = OKCancelButtons
                 )
 
