@@ -29,10 +29,20 @@ Good options for next steps:
 
 2) allow paddles to move horizontally
 
+    - create a new airhockey mode for this (maybe eventually change goal size)
+
 3) fix the delay after a score
 
 4) make the score render on the screen (the pong tutorial gives a brief 
 suggestion on how to do this) and not print to the command line
+
+5) right now there is this BALL_SPEED variable that sets the initial speed of
+the ball right when the game starts, I originally changed it in medium mode 
+thinking a faster ball might make it harder, but then I added the ball reset
+with a random velocity stuff after a score so now that change seems kind of 
+pointless.  Should the initial ball speed be random too?
+
+6)
 
 
 
