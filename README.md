@@ -11,5 +11,5 @@ Dependencies:
 
 
 On mac run:
-defaults write -g ApplePressAndHoldEnabled -bool false
+    defaults write -g ApplePressAndHoldEnabled -bool false
 (prevents option to select accents from coming up when you hold down a key)
