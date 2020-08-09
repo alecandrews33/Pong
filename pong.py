@@ -4,7 +4,7 @@ import sdl2
 import sdl2.ext
 
 from traits.api import Enum, HasTraits
-from traitsui.api import Item, View
+from traitsui.api import Item, OKCancelButtons, View
 
 from wrapper.MovementSystems.basic_movement_system import *
 from wrapper.CollisionSystems.basic_collision_system import *
@@ -14,6 +14,7 @@ from wrapper.CPUplayers.basicAI import *
 BLACK = sdl2.ext.Color(0, 0, 0)
 WHITE = sdl2.ext.Color(255, 255, 255)
 BALL_SPEED = 3
+PADDLE_SPEED = 3
 
 
 class GameInfo(HasTraits):
@@ -23,6 +24,7 @@ class GameInfo(HasTraits):
     view = View(Item(name='num_players'),
                 Item(name='difficulty',
                      enabled_when='num_players == 1'),
+                buttons = OKCancelButtons
                 )
 
 
