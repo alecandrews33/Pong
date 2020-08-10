@@ -14,7 +14,7 @@ class GameInfo(HasTraits):
     game_mode = Enum('Classic Pong', 'Hello World')
     num_players = Enum(1, 2)
     difficulty = Enum('Easy', 'Medium', 'Pong Master')
-    
+
     view = View(Item(name='game_mode'),
                 Item(name='num_players'),
                 Item(name='difficulty',
@@ -25,7 +25,7 @@ class GameInfo(HasTraits):
 
 # basically now in order to add a new game all we need to do is make a class
 # for that game and make it have a run method that accepts game info. Actually
-# the requirement is probably looser than that, it just needs to be importable 
+# the requirement is probably looser than that, it just needs to be importable
 # and runable from inside this script
 
 

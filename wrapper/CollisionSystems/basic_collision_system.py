@@ -31,6 +31,19 @@ class CollisionSystem(sdl2.ext.Applicator):
         return (bleft < right and bright > left and
                 btop < bottom and bbottom > top)
 
+    def ball_score(direction):
+        if (sign(direction) < 1):
+            self.p2data.points += 1
+        else:
+            self.p1data.points += 1
+        print("Player 1: {0}, Player 2: {1}".format(self.p1data.points, self.p2data.points))
+        self.ball.sprite.position = 390, 290
+        self.ball.velocity.vx = 0
+        self.ball.velocity.vy = 0
+        time.sleep(2)
+        self.ball.velocity.vx = sign(direction) * 3
+        self.ball.velocity.vy = 0
+
     def process(self, world, componentsets):
         collitems = [comp for comp in componentsets if self._overlap(comp)]
         if len(collitems) != 0:
@@ -57,20 +70,6 @@ class CollisionSystem(sdl2.ext.Applicator):
 
 
         if self.ball.sprite.x <= self.minx:
-            self.p2data.points = self.p2data.points + 1
-            print("Player 1: {0}, Player 2: {1}".format(self.p1data.points, self.p2data.points))
-            self.ball.sprite.position = 390, 290
-            self.ball.velocity.vx = 0
-            self.ball.velocity.vy = 0
-            time.sleep(2)
-            self.ball.velocity.vx = random.choice([-7,-5,-3,3,5,7])
-            self.ball.velocity.vy = random.choice([-2,-1,1,2])
+            ball_score(-1)
         elif self.ball.sprite.x + self.ball.sprite.size[0] >= self.maxx:
-            self.p1data.points = self.p1data.points + 1
-            print("Player 1: {0}, Player 2: {1}".format(self.p1data.points, self.p2data.points))
-            self.ball.sprite.position = 390, 290
-            self.ball.velocity.vx = 0
-            self.ball.velocity.vy = 0
-            time.sleep(2)
-            self.ball.velocity.vx = random.choice([-7,-5,-3,3,5,7])
-            self.ball.velocity.vy = random.choice([-2,-1,1,2])
+            ball_score(1)
