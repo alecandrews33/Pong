@@ -1,4 +1,6 @@
 """The Pong Game."""
+import os
+
 import sys
 import sdl2
 import sdl2.ext
@@ -34,6 +36,19 @@ class Midline(sdl2.ext.Entity):
         self.sprite = sprite
         self.sprite.position = 398, 0
 
+class DisplayScore1(sdl2.ext.Entity):
+    def __init__(self, world, score, factory, fontmanager):
+        self.factory = factory
+        self.fontmanager = fontmanager
+        self.sprite = factory.from_text(str(score),fontmanager=fontmanager)
+        self.sprite.position = 300, 400
+
+class DisplayScore2(sdl2.ext.Entity):
+    def __init__(self, world, score, factory, fontmanager):
+        self.factory = factory
+        self.fontmanager = fontmanager
+        self.sprite = factory.from_text(str(score),fontmanager=fontmanager)
+        self.sprite.position = 500, 400
 
 class PongGame():
     def run(game_info):
@@ -57,9 +72,15 @@ class PongGame():
         movement = MovementSystem(0, 0, 800, 600)
         spriterenderer = SoftwareRenderSystem(window)
 
+        dirname = os.path.dirname(__file__)
+        filename = os.path.join(dirname, '../wrapper/Fonts/battle_star/Battle Star.ttf')
+        fontmanager = sdl2.ext.FontManager(font_path=os.path.join(dirname, filename))
+
 
         world.add_system(movement)
         world.add_system(spriterenderer)
+
+        # add a midline for aesthetic
         midline = Midline(world, sp_midline)
 
 
@@ -86,9 +107,15 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250, True)
 
+            displayscore1 = DisplayScore1(world, player1.playerdata.points, factory, fontmanager)
+            displayscore2 = DisplayScore2(world, player2.playerdata.points, factory, fontmanager)
+
             collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
             world.add_system(collision)
             collision.ball = ball
+
+            collision.displayscore1 = displayscore1
+            collision.displayscore2 = displayscore2
 
             running = True
             while running:
