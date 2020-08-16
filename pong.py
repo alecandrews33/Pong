@@ -46,7 +46,7 @@ class Ball(sdl2.ext.Entity):
         self.sprite.position = posx, posy
         self.velocity = Velocity()
 
-class Net(sdl2.ext.Entity):
+class Midline(sdl2.ext.Entity):
     def __init__(self, world, sprite):
         self.sprite = sprite
         self.sprite.position = 398, 0
@@ -67,7 +67,7 @@ def run(game_info):
     sp_paddle2 = factory.from_color(WHITE, size=(20, 100))
     sp_ball = factory.from_color(WHITE, size=(20, 20))
 
-    sp_net = factory.from_color(WHITE, size=(4, 600))
+    sp_midline = factory.from_color(WHITE, size=(4, 600))
 
     world = sdl2.ext.World()
 
@@ -93,6 +93,8 @@ def run(game_info):
 
         aicontroller = TrackingAIController(0, 600, PADDLE_SPEED_AI)
         world.add_system(aicontroller)
+
+        midline = Midline(world, sp_midline)
 
         ball = Ball(world, sp_ball, 390, 290)
         ball.velocity.vx = -BALL_SPEED

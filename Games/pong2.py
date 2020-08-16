@@ -29,6 +29,11 @@ class Ball(sdl2.ext.Entity):
         self.sprite.position = posx, posy
         self.velocity = Velocity()
 
+class Midline(sdl2.ext.Entity):
+    def __init__(self, world, sprite):
+        self.sprite = sprite
+        self.sprite.position = 398, 0
+
 
 class PongGame():
     def run(game_info):
@@ -45,6 +50,7 @@ class PongGame():
         sp_paddle1 = factory.from_color(WHITE, size=(20, 100))
         sp_paddle2 = factory.from_color(WHITE, size=(20, 100))
         sp_ball = factory.from_color(WHITE, size=(20, 20))
+        sp_midline = factory.from_color(WHITE, size=(4, 600))
 
         world = sdl2.ext.World()
 
@@ -54,6 +60,7 @@ class PongGame():
 
         world.add_system(movement)
         world.add_system(spriterenderer)
+        midline = Midline(world, sp_midline)
 
 
         if game_info.num_players == 1:
