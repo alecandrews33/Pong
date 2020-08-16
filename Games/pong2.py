@@ -78,6 +78,7 @@ class PongGame():
 
         world.add_system(movement)
         world.add_system(spriterenderer)
+        #world.add_componenttype(sdl2.ext.SpriteFactory)
 
         # add a midline for aesthetic
         midline = Midline(world, sp_midline)
@@ -106,14 +107,10 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250, True)
 
-<<<<<<< HEAD
             displayscore1 = DisplayScore1(world, player1.playerdata.points, factory, fontmanager)
             displayscore2 = DisplayScore2(world, player2.playerdata.points, factory, fontmanager)
 
-            collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
-=======
             collision = CollisionSystem(0, 0, 800, 600, player1, player2)
->>>>>>> 0a9c73574b02b958db982633b3947b80ad7b933a
             world.add_system(collision)
             collision.ball = ball
 
