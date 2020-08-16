@@ -114,7 +114,7 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250)
 
-            collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
+            collision = CollisionSystem(0, 0, 800, 600, player1, player2)
             world.add_system(collision)
             collision.ball = ball
 
