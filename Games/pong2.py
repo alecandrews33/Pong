@@ -21,8 +21,7 @@ class Player(sdl2.ext.Entity):
         self.sprite = sprite
         self.sprite.position = posx, posy
         self.velocity = Velocity()
-        self.playerdata = PlayerData()
-        self.playerdata.ai = ai
+        self.playerdata = PlayerData(ai)
 
 
 class Ball(sdl2.ext.Entity):
@@ -107,10 +106,14 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250, True)
 
+<<<<<<< HEAD
             displayscore1 = DisplayScore1(world, player1.playerdata.points, factory, fontmanager)
             displayscore2 = DisplayScore2(world, player2.playerdata.points, factory, fontmanager)
 
             collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
+=======
+            collision = CollisionSystem(0, 0, 800, 600, player1, player2)
+>>>>>>> 0a9c73574b02b958db982633b3947b80ad7b933a
             world.add_system(collision)
             collision.ball = ball
 
@@ -142,7 +145,7 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250)
 
-            collision = CollisionSystem(0, 0, 800, 600, player1.playerdata, player2.playerdata)
+            collision = CollisionSystem(0, 0, 800, 600, player1, player2)
             world.add_system(collision)
             collision.ball = ball
 
@@ -169,5 +172,3 @@ class PongGame():
                             player2.velocity.vy = 0
                 sdl2.SDL_Delay(10)
                 world.process()
-
-
