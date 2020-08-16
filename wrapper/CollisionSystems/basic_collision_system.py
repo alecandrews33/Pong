@@ -21,7 +21,7 @@ class CollisionSystem(sdl2.ext.Applicator):
         self.p2 = player2
         self.score = False
         self.scoredOnLeftSide = False
-        self.displayscore1 = None 
+        self.displayscore1 = None
         self.displayscore2 = None
 
     def _overlap(self, item):
@@ -42,8 +42,8 @@ class CollisionSystem(sdl2.ext.Applicator):
             self.p2.playerdata.points += 1
         else:
             self.p1.playerdata.points += 1
-        self.displayscore1.sprite = self.displayscore1.factory.from_text(str(self.p1data.points),fontmanager=self.displayscore1.fontmanager)
-        self.displayscore2.sprite = self.displayscore2.factory.from_text(str(self.p2data.points),fontmanager=self.displayscore2.fontmanager)
+        self.displayscore1.sprite = self.displayscore1.spritefactory.from_text(str(self.p1.playerdata.points),fontmanager=self.displayscore1.fontmanager)
+        self.displayscore2.sprite = self.displayscore2.spritefactory.from_text(str(self.p2.playerdata.points),fontmanager=self.displayscore2.fontmanager)
         print("Player 1: {0}, Player 2: {1}".format(self.p1.playerdata.points, self.p2.playerdata.points))
         self.ball.sprite.position = 390, 290
         self.ball.velocity.vx = 0
