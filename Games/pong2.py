@@ -37,17 +37,17 @@ class Midline(sdl2.ext.Entity):
 
 class DisplayScore1(sdl2.ext.Entity):
     def __init__(self, world, score, factory, fontmanager):
-        self.factory = factory
+        self.spritefactory = factory
         self.fontmanager = fontmanager
-        self.sprite = factory.from_text(str(score),fontmanager=fontmanager)
-        self.sprite.position = 300, 400
+        self.sprite = factory.from_text(str(score),fontmanager=fontmanager, size=30)
+        self.sprite.position = 336, 40
 
 class DisplayScore2(sdl2.ext.Entity):
     def __init__(self, world, score, factory, fontmanager):
-        self.factory = factory
+        self.spritefactory = factory
         self.fontmanager = fontmanager
-        self.sprite = factory.from_text(str(score),fontmanager=fontmanager)
-        self.sprite.position = 500, 400
+        self.sprite = factory.from_text(str(score),fontmanager=fontmanager, size=30)
+        self.sprite.position = 448, 40
 
 class PongGame():
     def run(game_info):
