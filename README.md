@@ -1,6 +1,10 @@
 # Pong
 Pong implementation written in Python and run in SDL
 
+## Playing the Games
+To access the gaming menu, simply run `python play_games.py` from the Pong
+root directory.  Select a game, game details, and click ok to play. 
+
 
 Dependencies:
 
