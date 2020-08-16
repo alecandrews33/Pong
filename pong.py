@@ -46,6 +46,11 @@ class Ball(sdl2.ext.Entity):
         self.sprite.position = posx, posy
         self.velocity = Velocity()
 
+class Net(sdl2.ext.Entity):
+    def __init__(self, world, sprite):
+        self.sprite = sprite
+        self.sprite.position = 398, 0
+
 
 def run(game_info):
     sdl2.ext.init()
@@ -61,6 +66,8 @@ def run(game_info):
     sp_paddle1 = factory.from_color(WHITE, size=(20, 100))
     sp_paddle2 = factory.from_color(WHITE, size=(20, 100))
     sp_ball = factory.from_color(WHITE, size=(20, 20))
+
+    sp_net = factory.from_color(WHITE, size=(4, 600))
 
     world = sdl2.ext.World()
 
