@@ -7,11 +7,12 @@ from traitsui.api import Item, OKCancelButtons, View
 
 
 # import other games here
+from Games.air_hockey import AirHockeyGame
 from Games.pong2 import PongGame
 from Games.hello_world import HelloWorldGame
 
 class GameInfo(HasTraits):
-    game_mode = Enum('Classic Pong', 'Hello World')
+    game_mode = Enum('Classic Pong', 'Hello World', 'Air Hockey')
     num_players = Enum(1, 2)
     difficulty = Enum('Easy', 'Medium', 'Pong Master')
 
@@ -37,3 +38,5 @@ if __name__ == "__main__":
         sys.exit(PongGame.run(game_info))
     elif game_info.game_mode == 'Hello World':
         sys.exit(HelloWorldGame.run(game_info))
+    elif game_info.game_mode == 'Air Hockey':
+        sys.exit(AirHockeyGame.run(game_info))
