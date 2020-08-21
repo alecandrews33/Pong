@@ -142,9 +142,15 @@ class PongGame():
             player1 = Player(world, sp_paddle1, 0, 250)
             player2 = Player(world, sp_paddle2, 780, 250)
 
+            displayscore1 = DisplayScore1(world, player1.playerdata.points, factory, fontmanager)
+            displayscore2 = DisplayScore2(world, player2.playerdata.points, factory, fontmanager)
+
             collision = CollisionSystem(0, 0, 800, 600, player1, player2)
             world.add_system(collision)
             collision.ball = ball
+
+            collision.displayscore1 = displayscore1
+            collision.displayscore2 = displayscore2
 
             running = True
             while running:
