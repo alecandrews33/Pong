@@ -5,10 +5,10 @@ import sys
 import sdl2
 import sdl2.ext
 
-from wrapper.MovementSystems.basic_movement_system import *
-from wrapper.CollisionSystems.basic_collision_system import *
+from wrapper.MovementSystems.air_hockey_movement_system import *
+from wrapper.CollisionSystems.air_hockey_collision_system import *
 from wrapper.Renderers.basic_software_renderer import *
-from wrapper.CPUplayers.basicAI import *
+from wrapper.CPUplayers.air_hockey_AI import *
 
 BLACK = sdl2.ext.Color(0, 0, 0)
 WHITE = sdl2.ext.Color(255, 255, 255)
@@ -68,7 +68,9 @@ class AirHockeyGame():
 
         world = sdl2.ext.World()
 
-        movement = MovementSystem(0, 0, 800, 600)
+        movement = MovementSystemAirHockey(0, 0, 800, 600, 400)
+        movement.paddle1 = sp_paddle1
+        movement.paddle2 = sp_paddle2
         spriterenderer = SoftwareRenderSystem(window)
 
         dirname = os.path.dirname(__file__)
